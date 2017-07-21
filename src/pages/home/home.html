@@ -5,13 +5,34 @@
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  <ion-card [ngClass]="{'student-border': card.type == 'student', 'teacher-border': card.type == 'teacher'}"
+            *ngFor="let card of cards" (click)="cardSelected(card)">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/img/marty-avatar.png">
+      </ion-avatar>
+      <h2>{{card.user}}</h2>
+      <p>{{card.catedra}}</p>
+    </ion-item>
+
+    <ion-card-content>
+      <p>{{card.content}}</p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col center text-center>
+        <button ion-button icon-left clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>{{card.comment}} Comments</div>
+        </button>
+      </ion-col>
+      <ion-col align-self-center text-center>
+        <ion-note>
+          {{card.posted}}h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
 </ion-content>

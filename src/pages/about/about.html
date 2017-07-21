@@ -8,4 +8,11 @@
 
 <ion-content padding>
 
+  <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-list>
+    <ion-item (click)="catedraSelected(item)" *ngFor="let item of items">
+      {{ item.catedra }}
+    </ion-item>
+  </ion-list>
+
 </ion-content>

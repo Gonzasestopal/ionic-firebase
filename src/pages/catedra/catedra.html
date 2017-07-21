@@ -1,0 +1,112 @@
+<!--
+  Generated template for the CatedraPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{item.catedra}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card>
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/img/marty-avatar.png">
+      </ion-avatar>
+      <h2>{{item.profesor}}</h2>
+      <p>{{item.catedra}}</p>
+    </ion-item>
+    
+    <hr>
+
+    <ion-card-content>
+      <p>{{item.introduccion}}</p>
+    </ion-card-content>
+    
+    <hr>
+    
+    <ion-item>
+      <ion-icon name="time" item-left ></ion-icon>
+      <p>Turno: {{item.turno}}</p>
+    </ion-item>
+    
+    <ion-item>
+      <ion-icon name="pin" item-left ></ion-icon>
+      <h2>aver</h2>
+    </ion-item>
+
+    <ion-row>
+      <ion-col center text-center>
+        <button ion-button icon-left clear small (click)="toggleComments()">
+          <ion-icon name="text"></ion-icon>
+          <div>Show Comments</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button ion-button small>Seguir a esta catedra</button>
+      </ion-col>
+      <ion-col align-self-center text-center>
+        <ion-note>
+          h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+  
+  <ion-card class="teacher-border" *ngFor="let item of item.avisos">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="assets/img/marty-avatar.png">
+      </ion-avatar>
+      <h2>{{item.user}}</h2>
+      <p>{{item.catedra}}</p>
+    </ion-item>
+    
+    <hr>
+
+    <ion-card-content>
+      <p>{{item.aviso}}</p>
+    </ion-card-content>
+    
+    <hr>
+    
+    <ion-item>
+      <ion-icon name="time" item-left ></ion-icon>
+      <h2>{{item.date | date: 'EEE d MMM - hh:mm'}}</h2>
+    </ion-item>
+    
+    <ion-item>
+      <ion-icon name="pin" item-left ></ion-icon>
+      <h2>{{item.place}}</h2>
+    </ion-item>
+
+    <ion-row>
+      <ion-col center text-center>
+        <button ion-button icon-left clear small (click)="toggleComments()">
+          <ion-icon name="text"></ion-icon>
+          <div>Show Comments</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <button ion-button small>Agregar al calendario</button>
+      </ion-col>
+      <ion-col align-self-center text-center>
+        <ion-note>
+          {{item.posted}}h ago
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+</ion-content>

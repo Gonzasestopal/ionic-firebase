@@ -2,18 +2,36 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 import { DetailPage } from '../detail/detail';
+import { LoginPage } from '../login/login';
 
 import { Calendar } from '@ionic-native/calendar';
+
+import { AuthService } from '../../providers/auth-service/auth-service';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+
+import 'rxjs/add/operator/map';
+
+
+import { Observable } from 'rxjs/Rx';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  cards : any[];
+  
+  items: Observable<any[]>;
+  notices: Observable<any[]>;
+  test: Observable<any[]>;
+  user: any;
+  cards: any[];
 
-  constructor(public navCtrl: NavController, private calendar: Calendar) {
+  constructor(public navCtrl: NavController, private calendar: Calendar, private _auth: AuthService) {
     this.cards = [];
+    this.user = this._auth.currentUser;
+    this.items = this._auth.getUserSubjects(this.user.uid);
+    this.notices = this._auth.getUserNotices(this.user.uid);
+    this.test = this._auth.getNotices();
     let today = new Date();
     let todayPlusSix = new Date();
     let todayPlusTwelve = new Date();
@@ -69,5 +87,20 @@ export class HomePage {
     this.navCtrl.push(DetailPage, {
       card: card
     });  
+  }
+
+  
+  signOut() {
+    this._auth.signOut();
+    this.navCtrl.setRoot(LoginPage);
+  }
+  
+  ionViewDidLoad() {
+    console.log(this.notices);
+    console.log(this.items);
+    console.log(this.test);
+    // console.log(this._auth.getUserNotices(this._auth.currentUser.uid));
+    // console.log(this._auth.getUserSubjects(this._auth.currentUser.uid));
+
   }
 }

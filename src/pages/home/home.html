@@ -1,10 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Home</ion-title>
+    <ion-title>{{ notices | async }}</ion-title>
+    <ion-buttons end>
+      <button (click)="signOut()">{{user.displayName}}</button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+  
+  <div *ngFor="let item of notices | async" >
+    <p>{{item.name}}</p>
+  </div>
   <ion-card [ngClass]="{'student-border': card.type == 'student', 'teacher-border': card.type == 'teacher'}"
             *ngFor="let card of cards" (click)="cardSelected(card)">
 
@@ -12,7 +19,7 @@
       <ion-avatar item-start>
         <img src="assets/img/marty-avatar.png">
       </ion-avatar>
-      <h2>{{card.user}}</h2>
+      <h2>{{card.profesor}}</h2>
       <p>{{card.catedra}}</p>
     </ion-item>
 

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>{{ notices | async }}</ion-title>
+    <ion-title>Home</ion-title>
     <ion-buttons end>
       <button (click)="signOut()">{{user.displayName}}</button>
     </ion-buttons>
@@ -10,7 +10,7 @@
 <ion-content padding>
   
   <div *ngFor="let item of notices | async" >
-    <p>{{item.name}}</p>
+    <p *ngFor="let a of generateArray(item)">{{a.body}}</p>
   </div>
   <ion-card [ngClass]="{'student-border': card.type == 'student', 'teacher-border': card.type == 'teacher'}"
             *ngFor="let card of cards" (click)="cardSelected(card)">

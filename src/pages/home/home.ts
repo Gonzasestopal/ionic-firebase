@@ -103,4 +103,8 @@ export class HomePage {
     // console.log(this._auth.getUserSubjects(this._auth.currentUser.uid));
 
   }
+
+  generateArray(obj: Object) {
+    return Object.keys(obj).map((key) => { return  obj[key]  });
+  }
 }

@@ -59,23 +59,14 @@ export class AuthService {
     )
   }
   
-  getUserNotices(uid: any): any {
-    return this.db.list('/subjects')
-      .map(data => data.filter(data => uid in data.members))
+  getUserNotices(uid: any): Observable<any[]> {
+      return this.getUserSubjects(uid)
       .flatMap(subjects => {
-        subjects.map(function(e) { return e.$key })
         return this.db.list('/notices')
-          .map(data => data.filter(data => {
-          console.log(subjects)}))
-          
-
-          // .map(notices => (notices.filter(notice => {
-          //   console.log(notice);
-          //   console.log(subjects.map(function(e) { return e.$key}));
-          // })))
-
+          .map(data => data.filter(data => (
+            subjects.map(data => data.$key).includes(data.$key)
+          )))
       })
-
   }
   
   getNotices(): any {
